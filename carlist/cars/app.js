@@ -5,6 +5,15 @@ var path = require('path');
 var cookieParser = require('cookie-parser');
 var logger = require('morgan');
 
+//Set up mongoose connection
+var mongoose = require('mongoose');
+//var mongoDB = 'mongodb://<dbuser>:<dbpassword>@ds257470.mlab.com:57470/carlist';
+var mongoDB = 'mongodb://renat:renatisgod123@ds257470.mlab.com:57470/carlist';
+mongoose.connect(mongoDB);
+mongoose.Promise = global.Promise;
+var db = mongoose.connection;
+db.on('error', console.error.bind(console, 'MongoDB connection error:'));
+
 // contain code for handling particular sets of related "routes" (URL paths)
 var indexRouter = require('./routes/index');
 var usersRouter = require('./routes/users');
