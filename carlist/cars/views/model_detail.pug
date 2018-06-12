@@ -1,0 +1,18 @@
+extends layout
+
+block content
+
+  h1 Model: #{model.name}
+
+  div(style='margin-left:20px;margin-top:20px')
+
+    h4 Cars
+
+    dl
+    each car in model_cars
+      dt
+        a(href=car.url) #{car.title}
+      dd #{car.summary}
+
+    else
+      p This model has no cars

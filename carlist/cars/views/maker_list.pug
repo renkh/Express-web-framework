@@ -1,0 +1,13 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+  each maker in maker_list
+    li
+      a(href=maker.url) #{maker.name}
+      | (#{maker.founded})
+
+  else
+    li There are no makers.

@@ -1,13 +1,34 @@
 var CarInstance = require('../models/carinstance');
 
 // Display list of all CarInstances.
-exports.carinstance_list = function(req, res) {
-    res.send('NOT IMPLEMENTED: CarInstance list');
+exports.carinstance_list = function(req, res, next) {
+
+  CarInstance.find()
+    .populate('car')
+    .exec(function (err, list_carinstances) {
+      if (err) { return next(err); }
+      // Successful, so render
+      res.render('carinstance_list', { title: 'Car Instance List', carinstance_list: list_carinstances });
+    });
+
 };
 
 // Display detail page for a specific CarInstance.
-exports.carinstance_detail = function(req, res) {
-    res.send('NOT IMPLEMENTED: CarInstance detail: ' + req.params.id);
+exports.carinstance_detail = function(req, res, next) {
+
+    CarInstance.findById(req.params.id)
+    .populate('car')
+    .exec(function (err, carinstance) {
+      if (err) { return next(err); }
+      if (carinstance==null) { // No results.
+          var err = new Error('Car copy not found');
+          err.status = 404;
+          return next(err);
+        }
+      // Successful, so render.
+      res.render('carinstance_detail', { title: 'Car:', carinstance:  carinstance});
+    })
+
 };
 
 // Display CarInstance create form on GET.

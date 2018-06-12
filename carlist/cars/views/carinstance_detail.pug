@@ -1,0 +1,20 @@
+extends layout
+
+block content
+
+  h1 ID: #{carinstance._id}
+
+  p #[strong Title:]
+    a(href=carinstance.car.url) #{carinstance.car.title}
+  p #[strong Imprint:] #{carinstance.imprint}
+
+  p #[strong Status:]
+    if carinstance.status=='Available'
+      span.text-success #{carinstance.status}
+    else if carinstance.status=='Maintenance'
+      span.text-danger #{carinstance.status}
+    else
+      span.text-warning #{carinstance.status}
+
+  if carinstance.status!='Available'
+    p #[strong Due back:] #{carinstance.due_back}

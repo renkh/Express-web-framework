@@ -2,4 +2,17 @@ extends layout
 
 block content
   h1= title
-  p Welcome to #{title}
+  p Welcome to #[em CarList], a simple express app that includes a list that is rendered to the front end. When the user clicks on a list item, it will direct to a new route that includes additional information about that item.
+
+  h1 Dynamic content
+
+  if error
+    p Error getting dynamic content.
+  else
+    p The library has the following record counts:
+
+    ul
+      li #[strong Cars:] !{data.car_count}
+      li #[strong Amount:] !{data.car_instance_count}
+      li #[strong Makers:] !{data.maker_count}
+      li #[strong Models:] !{data.model_count}

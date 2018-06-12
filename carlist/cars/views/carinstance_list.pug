@@ -1,0 +1,14 @@
+extends layout
+
+block content
+  h1= title
+
+  ul
+  each val in carinstance_list
+    li
+      a(href=val.url) #{val.car.title} : #{val.imprint} -
+      if val.status=='Available'
+        span.text-success #{val.status}
+
+  else
+    li There are no car copies in this list.

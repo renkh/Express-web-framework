@@ -1,0 +1,27 @@
+extends layout
+
+block content
+  h1 #{title}: #{car.title}
+
+  p #[strong Maker:]
+    a(href=car.maker.url) #{car.maker.name}
+  p #[strong Model:]
+    a(href=car.model.url) #{car.model.name}
+  p #[strong Production:] #{car.production}
+  p #[strong Model:]&nbsp;
+    each val, index in car.model
+      a(href=val.url) #{val.name}
+      if index < car.model.length - 1
+        |,
+
+  div(style='margin-left:20px;margin-top:20px')
+    h4 Copies
+
+    each val in car_instances
+      hr
+      if val.status=='Available'
+        p.text-success #{val.status}
+      p #[strong Imprint:] #{val.imprint}
+
+    else
+      p There are no copies of this car in the library.
